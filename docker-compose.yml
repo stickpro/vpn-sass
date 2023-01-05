@@ -1,0 +1,30 @@
+version: '3.5'
+
+services:
+  vpn-sass:
+    image: vpn-sass
+    container_name: vpn-sass
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    depends_on:
+      - postgres
+    volumes:
+      - ./.bin/:/root/
+    env_file:
+      - .env
+
+  postgres:
+    image: postgres:15.1-alpine
+    container_name: vpn-postgres
+    environment:
+      - POSTGRES_USER=vpn
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=vpn
+    working_dir: /vpn-sass
+    volumes:
+      - .:/vpn-sass
+    ports:
+      - "8001:5432"
