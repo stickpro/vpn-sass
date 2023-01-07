@@ -1,15 +1,7 @@
 package main
 
-import (
-	"fmt"
-	"github.com/stickpro/vpn-sass/internal/config"
-)
+import "github.com/stickpro/vpn-sass/internal/app"
 
 func main() {
-	cfg, err := config.Init()
-	if err != nil {
-		return
-	}
-
-	fmt.Println(cfg.HTTP)
+	app.Run()
 }
